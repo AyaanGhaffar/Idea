@@ -1,30 +1,25 @@
-import asyncio
-import aiohttp
+# Original GR GLORY BOT code
 
-# Assuming you have some existing structure for your async methods
+# ... (original code here) ...
 
-async def get_clan_info(clan_id):
-    async with aiohttp.ClientSession() as session:
-        async with session.get(f'GetClanInfoByClanId/{clan_id}') as response:
-            return await response.json()
-
-async def request_guild_join(guild_id):
-    # Existing join logic
+def request_guild_join():
+    # existing logic for requesting guild join
     pass
 
-async def _heartbeat_loop():
-    while True:
-        try:
-            # Your existing code that could fail
-            pass
-        except ConnectionError:
-            print('Connection lost. Attempting to reconnect...')
-            await asyncio.sleep(5)  # Wait before reconnecting
+def get_clan_info():
+    # new method implementation
+    pass
 
-async def startup_phase(guild_id):
-    clan_id = extract_clan_id(guild_id)  # Update this method to retrieve clan_id from guild_id
-    clan_info = await get_clan_info(clan_id)
-    if clan_info:
-        await request_guild_join(guild_id)
-    else:
-        print('Guild does not exist.')
+# Update _heartbeat_loop with auto-reconnect logic
+
+def _heartbeat_loop():
+    # existing logic
+    # ...
+    # auto-reconnect logic implementation here
+
+# Update startup_phase to validate guild before sending requests
+
+def startup_phase():
+    # existing logic
+    # update validation logic here
+    pass
