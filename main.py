@@ -1,11 +1,14 @@
 import discord
 from discord.ext import commands
 import asyncio
+import os
 
 class BotAccount:
     def __init__(self, token):
         self.token = token
-        self.bot = commands.Bot(command_prefix='!')
+        intents = discord.Intents.default()
+        intents.message_content = True
+        self.bot = commands.Bot(command_prefix='!', intents=intents)
 
     async def startup_phase(self):
         @self.bot.event
@@ -25,7 +28,12 @@ class GloryMonitor:
             await asyncio.sleep(10)
 
     async def main(self):
-        bot_account = BotAccount('YOUR_TOKEN_HERE')
+        token = os.getenv('DISCORD_TOKEN', 'YOUR_TOKEN_HERE')
+        bot_account = BotAccount(token)
         await bot_account.startup_phase()
         self.session_active = True
         await self.glory_session()
+
+if __name__ == '__main__':
+    monitor = GloryMonitor()
+    asyncio.run(monitor.main())
